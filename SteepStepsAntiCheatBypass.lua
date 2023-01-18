@@ -1,45 +1,40 @@
---[[
+--Please put something here
+--Please put something here
+--Please put something here
+--Please put something here
+--Please put something here.
+--The code starts by checking to see if the player has any scripts attached to them.
+--If they do, it then checks which script is attached to the player's chat and bubblechat.
+--It then waits for a second before destroying both of those scripts.
+--After that, it warns the user that anti-cheat was successfully bypassed ez
+--The code will call the task.wait() function and then destroy the AntiCheatScript_1 and AntiCheatScript_2 variables, which are both PlayerScripts.
+--The warning message "anti cheat successfully bypassed ez" is then displayed on-screen in a text box.
+--"🤓😎🥶🤑😱😊😫🤯🤮😔🥺😃"
 
-╋╋╋╋╋╋┏┓╋╋╋╋╋╋╋╋┏┓╋╋╋╋╋╋╋┏┓╋╋╋╋╋┏┓
-╋╋╋╋╋┏┛┗┓╋╋╋╋╋╋╋┃┃╋╋╋╋╋╋┏┛┗┓╋╋╋╋┃┃
-┏━┓┏━┻┓┏╋━┳━━┳━━┫┃┏┳━━┳━┻┓┏╋━━┳━┛┃
-┃┏┓┫┏┓┃┃┃┏┫┃━┫┏┓┃┃┣┫┏━┫┏┓┃┃┃┃━┫┏┓┃
-┃┃┃┃┗┛┃┗┫┃┃┃━┫┗┛┃┗┫┃┗━┫┏┓┃┗┫┃━┫┗┛┃
-┗┛┗┻━━┻━┻┛┗━━┫┏━┻━┻┻━━┻┛┗┻━┻━━┻━━┛
-╋╋╋╋╋╋╋╋╋╋╋╋╋┃┃
-╋╋╋╋╋╋╋╋╋╋╋╋╋┗┛
-
-]]--
-
---[[ 
-
-AC Bypass for Steep Steps
-
-Put this script in your autoexe/auto execution folder
-
-might break some stuff related to chat, but it should work normally if you just click the chatbox and write...?
-
-works for most detected things in the game, easy...
-
-]]--
-
-
-repeat wait() until game:IsLoaded()
 
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
-local PlayerScripts = LocalPlayer:WaitForChild("PlayerScripts")
+local PlayerScripts = LocalPlayer:FindFirstChild("PlayerScripts")
 
-local AntiCheatScript_1 = PlayerScripts:WaitForChild("ChatScript")
-local AntiCheatScript_2 = PlayerScripts:WaitForChild("BubbleChat")
+if PlayerScripts then
+	local AntiCheatScript_1 = PlayerScripts:FindFirstChild("ChatScript")
+	local AntiCheatScript_2 = PlayerScripts:FindFirstChild("BubbleChat")
 
-getsenv(AntiCheatScript_1).bd = "bypassed ez"
-getsenv(AntiCheatScript_2).bd = "bypassed ez"
+	if AntiCheatScript_1 then
+		getsenv(AntiCheatScript_1).bd = "bypassed ez"
+	end
 
-task.wait()
+	if AntiCheatScript_2 then
+		getsenv(AntiCheatScript_2).bd = "bypassed ez"
+	end
 
-AntiCheatScript_1:Destroy()
-AntiCheatScript_2:Destroy()
+	task.wait()
 
-warn("anti cheat successfully bypassed ez")
+	AntiCheatScript_1:Destroy()
+	AntiCheatScript_2:Destroy()
+
+	warn("anti cheat successfully bypassed ez")
+else
+	warn("anti cheat failed to bypass not ez")
+end
